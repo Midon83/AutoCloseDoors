@@ -1,4 +1,5 @@
-﻿using ProjectM;
+﻿using Bloodstone.API;
+using ProjectM;
 using ProjectM.CastleBuilding;
 using Unity.Collections;
 using Unity.Entities;
@@ -9,28 +10,26 @@ namespace AutoCloseDoors.Systems
     {
         public static bool isAutoCloseDoor = true;
         public static float AutoCloseTimer = 2.0f;
-        public static bool isEnableUninstall = false;
         public static bool isAlwaysAutoClose = true;
 
-        public static FixedString512 UninstallCommand = "~autoclosedooruninstall";
-        public static EntityManager em = Plugin.Server.EntityManager;
+        public static EntityManager em = VWorld.Server.EntityManager;
 
         public static void DoorReceiver(Entity entity, EntityManager em)
         {
             if (em.HasComponent<Door>(entity) && em.HasComponent<CastleHeartConnection>(entity))
             {
                 var Door = em.GetComponentData<Door>(entity);
-                if (isAlwaysAutoClose)
+                if (isAutoCloseDoor)
                 {
                     Door.AutoCloseTime = AutoCloseTimer;
                 }
                 else
                 {
                     var HeartEntity = em.GetComponentData<CastleHeartConnection>(entity).CastleHeartEntity._Entity;
-                    if (em.HasComponent<Pylonstation>(HeartEntity))
+                    if (em.HasComponent<CastleHeart>(HeartEntity))
                     {
-                        var CastleHeart = em.GetComponentData<Pylonstation>(HeartEntity);
-                        if (CastleHeart.State == PylonstationState.Processing)
+                        var CastleHeart = em.GetComponentData<CastleHeart>(HeartEntity);
+                        if (CastleHeart.State == CastleHeartState.IsProcessing)
                         {
                             Door.AutoCloseTime = AutoCloseTimer;
                         }
@@ -58,8 +57,7 @@ namespace AutoCloseDoors.Systems
 
             var DoorEntities = DoorQuery.ToEntityArray(Allocator.Temp);
             if (DoorEntities.Length <= 0)
-            {
-                Plugin.Logger.LogError($"There are no doors in the server!!");
+            {         
                 return;
             }
             foreach (var entity in DoorEntities)
@@ -68,7 +66,6 @@ namespace AutoCloseDoors.Systems
                 Door.AutoCloseTime = 0;
                 em.SetComponentData(entity, Door);
             }
-            Plugin.Logger.LogWarning($"All doors (Total: {DoorEntities.Length}) has been reverted back to normal.");
         }
 
         public static void InitializeAutoClose()
@@ -84,7 +81,6 @@ namespace AutoCloseDoors.Systems
             var DoorEntities = DoorQuery.ToEntityArray(Allocator.Temp);
             if (DoorEntities.Length <= 0)
             {
-                Plugin.Logger.LogError($"There are no doors in the server!!");
                 return;
             }
             foreach (var entity in DoorEntities)
@@ -93,7 +89,6 @@ namespace AutoCloseDoors.Systems
                 Door.AutoCloseTime = AutoCloseTimer;
                 em.SetComponentData(entity, Door);
             }
-            Plugin.Logger.LogWarning($"All doors (Total: {DoorEntities.Length}) has been set to auto close at {AutoCloseTimer}s.");
         }
     }
 }

@@ -1,12 +1,7 @@
 ﻿using ProjectM;
-using ProjectM.Network;
-using System;
-using System.Globalization;
-using System.Runtime.InteropServices;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
-using Unity.Transforms;
+using Stunlock.Core;
+using Bloodstone.API;
 
 namespace AutoCloseDoors.Utils
 {
@@ -14,22 +9,19 @@ namespace AutoCloseDoors.Utils
     {
         public static PrefabGUID GetPrefabGUID(Entity entity)
         {
-            var entityManager = Plugin.Server.EntityManager;
+
+            var entityManager = VWorld.Server.EntityManager;
             PrefabGUID guid;
-            try
-            {
-                guid = entityManager.GetComponentData<PrefabGUID>(entity);
-            }
-            catch
-            {
-                guid.GuidHash = 0;
-            }
+
+            guid = entityManager.GetComponentData<PrefabGUID>(entity);
+
             return guid;
         }
 
         public static string GetPrefabName(PrefabGUID hashCode)
         {
-            var s = Plugin.Server.GetExistingSystem<PrefabCollectionSystem>();
+            var entityManager = VWorld.Server.EntityManager;
+            var s = VWorld.Server.GetExistingSystemManaged<PrefabCollectionSystem>();
             string name = "Nonexistent";
             if (hashCode.GuidHash == 0)
             {
@@ -37,7 +29,8 @@ namespace AutoCloseDoors.Utils
             }
             try
             {
-                name = s.PrefabNameLookupMap[hashCode].ToString();
+                name = s.PrefabGuidToNameDictionary[hashCode];
+
             }
             catch
             {

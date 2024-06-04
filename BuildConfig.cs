@@ -4,6 +4,6 @@
     {
         public const string PackageID = "id.igame.autoclosedoor";
         public const string Name = "AutoCloseDoors";
-        public const string Version = "1.0.3";
+        public const string Version = "2.0.0";
     }
 }

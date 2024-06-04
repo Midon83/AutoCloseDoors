@@ -31,7 +31,7 @@ When this is set to false, doors will not automatically close if castle is decay
 <details>
 <summary>Disable mod</summary>
 
-`.acd disable`\
+`.acd disable`
 
 Revert all doors in the game world to not close automatically (admin only).
 
@@ -40,7 +40,7 @@ Revert all doors in the game world to not close automatically (admin only).
 <details>
 <summary>Enable mod</summary>
 
-`.acd enable`\
+`.acd enable`
 
 Enable the mod to close the doors after X seconds (admin only).
 

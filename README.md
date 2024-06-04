@@ -10,13 +10,8 @@ If your server is on windows, or can be shutdown properly.\
 All you need to do to remove the mod is shutdown your server and delete the dll.
 
 If your server is on linux, or can't be shutdown properly\
-Make sure to change the config of `Enable Uninstall` to `true`,\
-Restart your server, and then execute the uninstallation command [default `~autoclosedooruninstall`].\
-After the uninstallation is complete, shutdown your server and remove the dll.
-
-## Wetstone Version
-1. Uncomment `<!--<DefineConstants>WETSTONE</DefineConstants>-->` in `AutoCloseDoors.csproj`
-2. Rebuild the dll.
+Make sure to disable the plugin by using the command ".acd disable" before removing the dll.\
+Shutdown your server and remove the dll.
 
 ## Config
 <details>
@@ -28,22 +23,19 @@ Switch on/off auto close for doors.
 How many second(s) to wait before door is automatically closed.
 - `Always Auto Close Doors` [default `false`]\
 When this is set to false, doors will not automatically close if castle is decaying, under attack, or being sieged.
-- `Enable Uninstall` [default `false`]\
-Do not enable for better performance on server.\
-This uninstallation method is only required on servers that can't shutdown properly, like VRising on Linux Wine.\
-On Windows, servers can be shutdown properly, and all doors is by default reverted back to normal on server shutdown.
-- `Uninstall Command` [default `~autoclosedooruninstall`]\
-Chat command to uninstall mod. Only work if "Enable Uninstall" is set to true & the user is an Admin (adminauth).
 
 </details>
 
 ## Commands
 
 <details>
-<summary>autoclosedooruninstall</summary>
+<summary>Disable mod</summary>
 
-`autoclosedooruninstall`\
-Revert all doors in the game world to not close automatically.
+`.acd disable`\
+Revert all doors in the game world to not close automatically (admin only).
+
+`.acd enable`\
+Enable the mod to close the doors after X seconds (admin only).
 
 </details>
 
@@ -51,17 +43,8 @@ Revert all doors in the game world to not close automatically.
 <details>
 <summary>Changelog</summary>
 
-`1.0.3`
-- Added config to prevent door auto closing if castle is decaying or under attack/siege.
-
-`1.0.2`
-- Fixed issue with servants causing door to be stuck.
-
-`1.0.1`
-- Now properly initialize config when reloaded with wetstone.
-
-`1.0.0`
-- Initial Release
+`2.0.0`
+- Initial Release for 1.0
 
 </details>
 
@@ -69,6 +52,9 @@ Revert all doors in the game world to not close automatically.
 <summary>Known Issues</summary>
 
 ### General
-- When doors are built for the first time, the user will need to open the door twice for the door to open.
+
+This mod was forked from AutoCloseDoors mod by [@Kaltharos](https://github.com/Kaltharos/AutoCloseDoors/tree/master).
+
+@Deca, VampireCommandFramework and Bloodstone.
 
 </details>

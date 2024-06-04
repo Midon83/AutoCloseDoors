@@ -10,7 +10,7 @@ namespace AutoCloseDoors.Systems
     {
         public static bool isAutoCloseDoor = true;
         public static float AutoCloseTimer = 2.0f;
-        public static bool isAlwaysAutoClose = true;
+        public static bool isAlwaysAutoClose = false;
 
         public static EntityManager em = VWorld.Server.EntityManager;
 

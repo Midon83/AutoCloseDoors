@@ -26,7 +26,7 @@ public static class AutoCloseDoorsConfig
         AlwaysAutoCloseDoors = config.Bind(
             section: "General",
             key: "AlwaysAutoCloseDoors",
-            defaultValue: true,
+            defaultValue: false,
             description: "When this is set to false, doors will not automatically close if castle is decaying, under attack, or being sieged"
         );
 

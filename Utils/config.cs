@@ -1,13 +1,15 @@
-﻿using BepInEx.Configuration;
+﻿using AutoCloseDoors.Systems;
+using BepInEx.Configuration;
 
 public static class AutoCloseDoorsConfig
 {
+    public static ConfigFile Config;
     public static ConfigEntry<bool> EnableAutoCloseDoors { get; private set; }
     public static ConfigEntry<float> AutoCloseTimer { get; private set; }
-    public static ConfigEntry<bool> AlwaysAutoCloseDoors { get; private set; }
 
     public static void Init(ConfigFile config)
     {
+        Config = config;
 
         EnableAutoCloseDoors = config.Bind(
             section: "General",
@@ -23,13 +25,13 @@ public static class AutoCloseDoorsConfig
             description: "How many second(s) to wait before door is automatically closed"
         );
 
-        AlwaysAutoCloseDoors = config.Bind(
-            section: "General",
-            key: "AlwaysAutoCloseDoors",
-            defaultValue: false,
-            description: "When this is set to false, doors will not automatically close if castle is decaying, under attack, or being sieged"
-        );
+    }
 
+    public static void Save()
+    {
+        EnableAutoCloseDoors.Value = AutoCloseDoor.isAutoCloseDoor;
+        AutoCloseTimer.Value = AutoCloseDoor.AutoCloseTimer;
+        Config.Save();
     }
 
 }

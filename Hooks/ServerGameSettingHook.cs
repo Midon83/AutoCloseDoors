@@ -12,7 +12,12 @@ namespace AutoCloseDoors.Hooks
         {
             if (isInitialized == false)
             {
-                if (AutoCloseDoor.isAutoCloseDoor) AutoCloseDoor.InitializeAutoClose();
+                // Remove Autoclose first, so config on Linux/wine comes into effect, otherwise it just keeps the last state (enabled/disabled)
+                AutoCloseDoor.RevertAutoClose();
+                if (AutoCloseDoor.isAutoCloseDoor)
+                {
+                    AutoCloseDoor.InitializeAutoClose();
+                }
                 isInitialized = true;
             }
         }

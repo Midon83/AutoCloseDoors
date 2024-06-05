@@ -8,9 +8,8 @@ namespace AutoCloseDoors.Systems
 {
     public static class AutoCloseDoor
     {
-        public static bool isAutoCloseDoor = true;
+        public static bool isAutoCloseDoor = false;
         public static float AutoCloseTimer = 2.0f;
-        public static bool isAlwaysAutoClose = false;
 
         public static EntityManager em = VWorld.Server.EntityManager;
 
@@ -22,26 +21,8 @@ namespace AutoCloseDoors.Systems
                 if (isAutoCloseDoor)
                 {
                     Door.AutoCloseTime = AutoCloseTimer;
+                    em.SetComponentData(entity, Door);
                 }
-                else
-                {
-                    var HeartEntity = em.GetComponentData<CastleHeartConnection>(entity).CastleHeartEntity._Entity;
-                    if (em.HasComponent<CastleHeart>(HeartEntity))
-                    {
-                        var CastleHeart = em.GetComponentData<CastleHeart>(HeartEntity);
-                        if (CastleHeart.State == CastleHeartState.IsProcessing)
-                        {
-                            Door.AutoCloseTime = AutoCloseTimer;
-                        }
-                        else
-                        {
-                            Door.AgeSinceOpened = 9999999999;
-                            Door.AutoCloseTime = AutoCloseTimer;
-                        }
-
-                    }
-                }
-                em.SetComponentData(entity, Door);
             }
         }
 
@@ -70,24 +51,27 @@ namespace AutoCloseDoors.Systems
 
         public static void InitializeAutoClose()
         {
-            var DoorQuery = em.CreateEntityQuery(new EntityQueryDesc()
+            if (isAutoCloseDoor)
             {
-                All = new ComponentType[] {
+                var DoorQuery = em.CreateEntityQuery(new EntityQueryDesc()
+                {
+                    All = new ComponentType[] {
                             ComponentType.ReadOnly<Door>(),
                         },
-                Options = EntityQueryOptions.IncludeDisabled
-            });
+                    Options = EntityQueryOptions.IncludeDisabled
+                });
 
-            var DoorEntities = DoorQuery.ToEntityArray(Allocator.Temp);
-            if (DoorEntities.Length <= 0)
-            {
-                return;
-            }
-            foreach (var entity in DoorEntities)
-            {
-                var Door = em.GetComponentData<Door>(entity);
-                Door.AutoCloseTime = AutoCloseTimer;
-                em.SetComponentData(entity, Door);
+                var DoorEntities = DoorQuery.ToEntityArray(Allocator.Temp);
+                if (DoorEntities.Length <= 0)
+                {
+                    return;
+                }
+                foreach (var entity in DoorEntities)
+                {
+                    var Door = em.GetComponentData<Door>(entity);
+                    Door.AutoCloseTime = AutoCloseTimer;
+                    em.SetComponentData(entity, Door);
+                }
             }
         }
     }

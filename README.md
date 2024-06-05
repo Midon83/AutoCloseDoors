@@ -21,8 +21,6 @@ Shutdown your server and remove the dll.
 Switch on/off auto close for doors.
 - `Auto Close Timer` [default `2.0`]\
 How many second(s) to wait before door is automatically closed.
-- `Always Auto Close Doors` [default `false`]\
-When this is set to false, doors will not automatically close if castle is decaying, under attack, or being sieged.
 
 </details>
 
@@ -46,9 +44,26 @@ Enable the mod to close the doors after X seconds (admin only).
 
 </details>
 
+<details>
+<summary>Set time</summary>
+
+`.acd time <seconds>`
+
+Changes the auto close timer on the fly (admin only).
+
+</details>
+
 ## More Information
 <details>
 <summary>Changelog</summary>
+
+`2.0.2`
+- Removed "Always Auto Close Doors" option
+- Added .acd time <seconds> command to change the close timer on thy fly
+- State (enabled/disabled) and timer saved to config if using the commands
+- Added fix for linux/wine servers to use the config values correctly
+- Removed Bloodstone reload function for this mod since it's not necessary due to the commands
+- Bugfixes
 
 `2.0.1`
 - Thunderstroe Release for v2.0.1

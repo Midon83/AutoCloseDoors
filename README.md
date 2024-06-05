@@ -50,8 +50,11 @@ Enable the mod to close the doors after X seconds (admin only).
 <details>
 <summary>Changelog</summary>
 
+`2.0.1`
+- Thunderstroe Release for v2.0.1
+
 `2.0.0`
-- Initial Release for 1.0
+- Initial Release for v2.0.0
 
 </details>
 

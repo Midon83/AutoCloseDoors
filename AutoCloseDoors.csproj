@@ -8,11 +8,6 @@
     <LangVersion>latest</LangVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
-   <ItemGroup>
-    <Compile Remove="Thunderstore\**" />
-    <EmbeddedResource Remove="Thunderstore\**" />
-    <None Remove="Thunderstore\**" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.691" IncludeAssets="compile" />
     <PackageReference Include="BepInEx.Core" Version="6.0.0-be.691" IncludeAssets="compile" />

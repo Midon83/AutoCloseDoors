@@ -1,5 +1,4 @@
-﻿using Bloodstone.API;
-using ProjectM;
+﻿using ProjectM;
 using ProjectM.CastleBuilding;
 using Unity.Collections;
 using Unity.Entities;
@@ -11,7 +10,7 @@ namespace AutoCloseDoors.Systems
         public static bool isAutoCloseDoor = false;
         public static float AutoCloseTimer = 2.0f;
 
-        public static EntityManager em = VWorld.Server.EntityManager;
+        public static EntityManager em = Core.EntityManager;
 
         public static void DoorReceiver(Entity entity, EntityManager em)
         {

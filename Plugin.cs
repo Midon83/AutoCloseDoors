@@ -3,13 +3,15 @@ using HarmonyLib;
 using UnityEngine;
 using BepInEx.Unity.IL2CPP;
 using VampireCommandFramework;
-using AutoCloseDoors.Systems;
+using ScarletRCON.Shared;
 using System.Collections;
+using AutoCloseDoors.Systems;
 
 namespace AutoCloseDoors
 {
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
     [BepInDependency("gg.deca.VampireCommandFramework")]
+    [BepInDependency("markvaaz.ScarletRCON", BepInDependency.DependencyFlags.SoftDependency)]
 
     public class Plugin : BasePlugin
     {
@@ -33,11 +35,13 @@ namespace AutoCloseDoors
             _harmony.PatchAll(System.Reflection.Assembly.GetExecutingAssembly());
 
             CommandRegistry.RegisterAll();
+            RconCommandRegistrar.RegisterAll();
         }
 
         public override bool Unload()
         {
             CommandRegistry.UnregisterAssembly();
+            RconCommandRegistrar.UnregisterAssembly();
             _harmony?.UnpatchSelf();
             return true;
         }
@@ -48,13 +52,17 @@ namespace AutoCloseDoors
             Core.StartCoroutine(RefreshDoorList());
         }
 
-        private IEnumerator RefreshDoorList()
+        public static IEnumerator RefreshDoorList()
         {
             while (true)
             {
-                AutoCloseDoor.InitializeAutoClose();
+                if (AutoCloseDoor.isAutoCloseDoor)
+                {
+                    AutoCloseDoor.InitializeAutoClose();
+                }
                 yield return new WaitForSeconds(5f);
             }
         }
+
     }
 }

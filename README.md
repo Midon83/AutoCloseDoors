@@ -51,6 +51,16 @@ Changes the auto close timer on the fly (admin only).
 
 </details>
 
+## Optional ScarletRCON integration
+
+Install ScarletRCON from https://thunderstore.io/c/v-rising/p/ScarletMods/ScarletRCON
+
+Connect your RCON client to the server and you can use the following commands via RCON:
+
+`autoclosedoors.disable`
+`autoclosedoors.enable`
+`autoclosedoors.time <seconds>`
+
 ### Credits
 
 This mod was forked from AutoCloseDoors mod by [@Kaltharos](https://github.com/Kaltharos/AutoCloseDoors/tree/master).
@@ -58,5 +68,7 @@ This mod was forked from AutoCloseDoors mod by [@Kaltharos](https://github.com/K
 [Deca](https://github.com/deca) VampireCommandFramework.
 
 [odjit](https://github.com/odjit) Ideas and some code snippets.
+
+[Mark](https://github.com/markvaaz) ScarletRCON mod integration
 
 </details>

@@ -4,15 +4,16 @@
     <AssemblyName>AutoCloseDoors</AssemblyName>
     <Description>Automatically close doors</Description>
 	<Authors>Midon</Authors>
-    <Version>3.0.1</Version>
+    <Version>3.1.0</Version>
    <BepInExPluginGuid>io.midon.AutoCloseDoors</BepInExPluginGuid>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
-    <PackageReference Include="VRising.VampireCommandFramework" Version="0.10.0" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.*" />
+    <PackageReference Include="ScarletRCON.SourceSupport" Version="1.2.*" />
+    <PackageReference Include="VRising.VampireCommandFramework" Version="0.10.*" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Backtrace.Unity" HintPath="..\interop\Backtrace.Unity.dll" />

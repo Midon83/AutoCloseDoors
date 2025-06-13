@@ -1,3 +1,12 @@
+`3.1.0`
+- Some optimizations
+- Updated dependencies
+- Added optional ScarletRCON support for all commands
+
+`3.0.1`
+- Updated dependencies for VCF
+- Updated dependencies for BepinEx and VCF in thunderstore
+
 `3.0.0`
 - Initial release for V-Rising v1.1 Oakveil
 - Removed Bloodstone dependency
